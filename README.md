@@ -1,4 +1,4 @@
-#Skidata
+# Skidata
 
 The PHP adapter that makes it easy send request to Skidata DTA.
 
