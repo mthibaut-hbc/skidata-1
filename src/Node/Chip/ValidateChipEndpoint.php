@@ -6,9 +6,11 @@ namespace Skidata\Dta\Node\Chip;
 
 use Skidata\Dta\Bridge\MessageBuilderInterface;
 use Skidata\Dta\Bridge\TransceiverInterface;
+use Skidata\Dta\Feature\CheckValidityOfChipRequest;
 use Skidata\Dta\Feature\RequestInterface;
 use Skidata\Dta\Node\EndpointInterface;
 use Skidata\Dta\Node\ResponseInterface;
+use Skidata\Dta\Node\UnknownRequestException;
 
 final class ValidateChipEndpoint implements EndpointInterface
 {
@@ -35,11 +37,11 @@ final class ValidateChipEndpoint implements EndpointInterface
 
     public function execute(RequestInterface $request): ResponseInterface
     {
-        $message = $this->messageBuilder->build(
-            self::SERVICE,
-            $request->source(),
-            $request->parameters()
-        );
+        if (!$request instanceof CheckValidityOfChipRequest) {
+            throw new UnknownRequestException($this, $request, CheckValidityOfChipRequest::class);
+        }
+
+        $message = $this->messageBuilder->build(self::SERVICE, $request->source(), $request->parameters());
 
         return new ValidateChipResponse(
             $this->transceiver->process($message)
