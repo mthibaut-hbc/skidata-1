@@ -24,7 +24,7 @@ final class DtaConfigurator implements ConfiguratorInterface
         $this->identifier = $identifier;
     }
 
-    public function recipient(string $service): string
+    public function destination(string $service): string
     {
         return Strings::trim($this->hostname, '/').'/'.$service;
     }

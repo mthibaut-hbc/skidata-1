@@ -6,7 +6,7 @@ namespace Skidata\Dta\Security;
 
 interface ConfiguratorInterface
 {
-    public function recipient(string $service): string;
+    public function destination(string $service): string;
 
     public function identifier(): string;
 }
