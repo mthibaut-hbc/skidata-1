@@ -9,33 +9,41 @@ final class Message implements MessageInterface
     /**
      * @var string
      */
-    private $recipient;
+    private $destination;
 
     /**
      * @var string
      */
-    private $data;
+    private $requirements;
 
-    public function __construct(string $recipient, string $data)
+    /**
+     * @var string|null
+     */
+    private $parameters;
+
+    public function __construct(string $destination, string $requirements)
     {
-        $this->recipient = $recipient;
-        $this->data = $data;
+        $this->destination = $destination;
+        $this->requirements = $requirements;
     }
 
-    public function recipient(): string
+    public function destination(): string
     {
-        return $this->recipient;
+        return $this->destination;
     }
 
-    public function data(): string
+    public function requirements(): string
     {
-//        $data = 'json=' . $this->encrypt($this->source);
-//        if ($this->hasParameters()) {
-//            $data .= '&parametr=' . $this->encrypt($this->parameters);
-//        }
-//
-//        return $data;
+        return $this->requirements;
+    }
 
-        return $this->data;
+    public function parameters(): ?string
+    {
+        return $this->parameters;
+    }
+
+    public function parametrize(string $parameters): void
+    {
+        $this->parameters = $parameters;
     }
 }

@@ -25,15 +25,20 @@ final class MessageBuilder implements MessageBuilderInterface
         $this->encryptor = $encryptor;
     }
 
-    public function build(string $service, array $source, array $parameters): MessageInterface
+    public function build(string $service, array $requirements, array $parameters): MessageInterface
     {
-        $source['id'] = $this->configurator->identifier();
+        $requirements['id'] = $this->configurator->identifier();
+        $message = new Message(
+            $this->configurator->destination($service),
+            $this->encryptor->encrypt($requirements)
+        );
 
-        $fields = 'json='.$this->encryptor->encrypt($source);
         if ($parameters) {
-            $fields .= 'parametr='.$this->encryptor->encrypt($parameters);
+            $message->parametrize(
+                $this->encryptor->encrypt($parameters)
+            );
         }
 
-        return new Message($this->configurator->recipient($service), $fields);
+        return $message;
     }
 }

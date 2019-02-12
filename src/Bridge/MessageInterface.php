@@ -6,7 +6,11 @@ namespace Skidata\Dta\Bridge;
 
 interface MessageInterface
 {
-    public function recipient(): string;
+    public function destination(): string;
 
-    public function data(): string;
+    public function requirements(): string;
+
+    public function parameters(): ?string;
+
+    public function parametrize(string $parameters): void;
 }

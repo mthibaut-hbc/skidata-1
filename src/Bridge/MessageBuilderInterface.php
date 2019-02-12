@@ -6,5 +6,5 @@ namespace Skidata\Dta\Bridge;
 
 interface MessageBuilderInterface
 {
-    public function build(string $service, array $source, array $parameters): MessageInterface;
+    public function build(string $service, array $requirements, array $parameters): MessageInterface;
 }
