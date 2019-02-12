@@ -10,6 +10,7 @@ services:
 
 parameters:
     exclude_checkers:
+        - 'PhpCsFixer\Fixer\Operator\ConcatSpaceFixer'
         - 'PhpCsFixer\Fixer\Operator\NotOperatorWithSuccessorSpaceFixer'
         - 'PhpCsFixer\Fixer\Whitespace\MethodChainingIndentationFixer'
         - 'SlevomatCodingStandard\Sniffs\TypeHints\TypeHintDeclarationSniff'

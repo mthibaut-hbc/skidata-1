@@ -17,7 +17,7 @@ final class RsaEncryptor implements EncryptorInterface
     public function __construct(string $publicKey)
     {
         $this->rsa = new RSA(
-            file_exists($publicKey) ? 'file://'.$publicKey : $publicKey
+            file_exists($publicKey) ? 'file://' . $publicKey : $publicKey
         );
     }
 
