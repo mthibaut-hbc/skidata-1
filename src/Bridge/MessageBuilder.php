@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Skidata\Dta\Bridge;
 
+use Nette\Utils\Json;
 use Skidata\Dta\Security\ConfiguratorInterface;
 use Skidata\Dta\Security\EncryptorInterface;
 
@@ -34,9 +35,7 @@ final class MessageBuilder implements MessageBuilderInterface
         );
 
         if ($parameters) {
-            $message->parametrize(
-                $this->encryptor->encrypt($parameters)
-            );
+            $message->parametrize(Json::encode($parameters));
         }
 
         return $message;

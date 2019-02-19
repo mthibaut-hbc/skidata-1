@@ -39,7 +39,11 @@ final class Message implements MessageInterface
 
     public function parameters(): ?string
     {
-        return $this->parameters;
+        if (!$this->parameters) {
+            return null;
+        }
+
+        return base64_encode($this->parameters);
     }
 
     public function parametrize(string $parameters): void
